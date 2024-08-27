@@ -1,0 +1,65 @@
+.chats-div {
+  background: rgb(71, 76, 71);
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  margin-left: 5px;
+  margin-top: 10px;
+  border-top-left-radius: 20px;
+  align-items: center;
+}
+
+.newChat-span {
+  position: absolute;
+  left: 370px;
+  top: 31px;
+  font-size: 25px;
+  cursor: pointer;
+  height: 32px;
+  width: 30px;
+  border-radius: 3px;
+}
+
+.newChat-span:hover {
+  background: rgb(42, 45, 42);
+}
+
+.chats-div input {
+  margin-bottom: 20px;
+  width: 70%;
+  border-radius: 3px;
+  background: rgb(51, 55, 51);
+  border: none;
+  height: 30px;
+}
+
+.chats-div input:focus {
+  border: none;
+  outline: none;
+}
+
+.chat-div {
+  /* background: palevioletred; */
+  margin: 1px 5px;
+  border-radius: 5px;
+  height: 45px;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+}
+
+.chat-div:hover {
+  background: rgb(42, 45, 42);
+}
+
+.chats-div form {
+  width: 100%;
+}
+
+.emptty-div {
+  height: max-content;
+  width: max-content;
+}

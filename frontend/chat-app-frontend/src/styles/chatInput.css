@@ -1,0 +1,43 @@
+.chatInput-div {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.chatInput-div input {
+  background: #474c47;
+  height: 40px;
+  font-size: 15px;
+  width: 70%;
+  border-style: none;
+  border-radius: 3px;
+}
+
+.chatInput-div input:hover {
+  background: rgb(42, 45, 42);
+}
+
+.chatInput-div input:focus {
+  background: rgb(42, 45, 42);
+  border: none;
+  outline: none;
+}
+
+.span-icon {
+  height: 40px;
+  width: 40px;
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.icon-hidden {
+  opacity: 0;
+  height: 40px;
+  width: 40px;
+}

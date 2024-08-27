@@ -1,0 +1,18 @@
+.reg-mainDiv form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.reg-mainDiv input {
+  height: 40px;
+  width: 250px;
+  border-radius: 3px;
+  border: none;
+}
+
+.reg-mainDiv form a {
+  cursor: pointer;
+}
