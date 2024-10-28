@@ -21,7 +21,7 @@ const ChatInput = ({ addMessage }) => {
     if (content) {
       await axios
         .post(
-          `http://localhost:8000/api/v1/message/send/${chat._id}`,
+          `https://chat-app-v3-s16n.onrender.com/api/v1/message/send/${chat._id}`,
           { content: content },
           {
             withCredentials: true,

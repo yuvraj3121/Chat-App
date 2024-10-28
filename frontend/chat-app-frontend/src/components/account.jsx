@@ -21,7 +21,7 @@ const Account = () => {
   const getCurrentUser = async () => {
     await axios
       .post(
-        "http://localhost:8000/api/v1/users/current-user",
+        "https://chat-app-v3-s16n.onrender.com/api/v1/users/current-user",
         {},
         {
           withCredentials: true,
@@ -50,7 +50,7 @@ const Account = () => {
       // console.log(userData);
       await axios
         .patch(
-          "http://localhost:8000/api/v1/users/update-account",
+          "https://chat-app-v3-s16n.onrender.com/api/v1/users/update-account",
           {
             username: userData.username,
             fullname: userData.fullname,
@@ -81,7 +81,7 @@ const Account = () => {
       console.log(passData);
       await axios
         .post(
-          "http://localhost:8000/api/v1/users/change-password",
+          "https://chat-app-v3-s16n.onrender.com/api/v1/users/change-password",
           {
             currentPassword: passData.currentPassword,
             newPassword: passData.newPassword,

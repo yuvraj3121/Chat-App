@@ -23,7 +23,7 @@ const ChatArea = () => {
   const fetchMessages = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:8000/api/v1/message/getMessages/${chat._id}`,
+        `https://chat-app-v3-s16n.onrender.com/api/v1/message/getMessages/${chat._id}`,
         {
           withCredentials: true,
         }
@@ -65,9 +65,12 @@ const ChatArea = () => {
 
   const handleDelete = async (msgId) => {
     await axios
-      .delete(`http://localhost:8000/api/v1/message/delete/${msgId}`, {
-        withCredentials: true,
-      })
+      .delete(
+        `https://chat-app-v3-s16n.onrender.com/api/v1/message/delete/${msgId}`,
+        {
+          withCredentials: true,
+        }
+      )
       .then((res) => {
         console.log(res);
         fetchMessages();
@@ -78,7 +81,7 @@ const ChatArea = () => {
   const handleEdit = async (msgId) => {
     await axios
       .patch(
-        `http://localhost:8000/api/v1/message/edit/${msgId}`,
+        `https://chat-app-v3-s16n.onrender.com/api/v1/message/edit/${msgId}`,
         {
           content: editMsg.content,
         },
