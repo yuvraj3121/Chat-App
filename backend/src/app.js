@@ -6,7 +6,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://flowchat-v2.netlify.app",
+    origin: "https://flowchat-v3.netlify.app",
     credentials: true,
   })
 );
