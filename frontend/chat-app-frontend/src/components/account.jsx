@@ -5,29 +5,33 @@ import { useNavigate } from "react-router-dom";
 
 const Account = () => {
   const navigate = useNavigate();
+
   const [userData, setUserData] = useState({
     username: "",
     fullname: "",
     email: "",
   });
+
+  const [originalData, setOriginalData] = useState(userData);
   const [clickPass, setClickPass] = useState(false);
   const [clickEdit, setClickEdit] = useState(false);
-  const [editData, setEditData] = useState({ userData });
+
   const [passData, setPassData] = useState({
     currentPassword: "",
     newPassword: "",
   });
 
   const getCurrentUser = async () => {
-    await axios
-      .get("https://chat-app-v4.onrender.com/api/v1/users/current-user", {
-        withCredentials: true,
-      })
-      .then((res) => {
-        // console.log(res.data.data);
-        setUserData(res.data.data);
-      })
-      .catch((err) => console.log("error while getting current user : ", err));
+    try {
+      const res = await axios.get(
+        "https://chat-app-v4.onrender.com/api/v1/users/current-user",
+        { withCredentials: true }
+      );
+      setUserData(res.data.data);
+      setOriginalData(res.data.data);
+    } catch (err) {
+      console.log("Error while getting current user:", err);
+    }
   };
 
   useEffect(() => {
@@ -36,69 +40,65 @@ const Account = () => {
 
   const handleEditChange = (e) => {
     const { name, value } = e.target;
-    setUserData((prevData) => ({ ...prevData, [name]: value }));
+    setUserData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleEditSave = async () => {
-    setEditData(userData);
+  const handleEditToggle = async () => {
     if (clickEdit) {
-      // console.log("save");
-      // console.log(userData);
-      await axios
-        .patch(
+      try {
+        await axios.patch(
           "https://chat-app-v4.onrender.com/api/v1/users/update-account",
           {
             username: userData.username,
             fullname: userData.fullname,
             email: userData.email,
           },
-          {
-            withCredentials: true,
-          }
-        )
-        .then((res) => console.log(res))
-        .catch((err) => console.log("error while editing info:", err));
+          { withCredentials: true }
+        );
+        setOriginalData(userData);
+        console.log("Account updated successfully");
+      } catch (err) {
+        console.log("Error while editing info:", err);
+      }
+    } else {
+      setOriginalData(userData);
     }
     setClickEdit(!clickEdit);
   };
 
   const handleEditCancel = () => {
-    setUserData(editData);
-    setClickEdit(!clickEdit);
+    setUserData(originalData);
+    setClickEdit(false);
   };
 
   const handlePassChange = (e) => {
     const { name, value } = e.target;
-    setPassData((prevData) => ({ ...prevData, [name]: value }));
+    setPassData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handlePassSave = async () => {
+  const handlePassToggle = async () => {
     if (clickPass) {
-      console.log(passData);
-      await axios
-        .post(
+      try {
+        const res = await axios.post(
           "https://chat-app-v4.onrender.com/api/v1/users/change-password",
           {
             currentPassword: passData.currentPassword,
             newPassword: passData.newPassword,
           },
-          {
-            withCredentials: true,
-          }
-        )
-        .then((res) => {
-          console.log(res);
-          alert(res.data.message);
-        })
-        .catch((err) => console.log("error while editing info:", err));
-      setPassData({ currentPassword: "", newPassword: "" });
+          { withCredentials: true }
+        );
+        alert(res.data.message);
+        setPassData({ currentPassword: "", newPassword: "" });
+      } catch (err) {
+        console.log("Error while changing password:", err);
+      }
     }
     setClickPass(!clickPass);
   };
 
   const handlePassCancel = () => {
     setPassData({ currentPassword: "", newPassword: "" });
-    setClickPass(!clickPass);
+    setClickPass(false);
   };
 
   return (
@@ -107,10 +107,14 @@ const Account = () => {
       <span className="naviHome-span" onClick={() => navigate("/")}>
         Home
       </span>
+
       <div className="info-div">
-        <span className="profilePic">{userData.username[0]}</span>
+        <span className="profilePic">
+          {userData.username ? userData.username[0].toUpperCase() : ""}
+        </span>
+
         <p>
-          Username :{" "}
+          Username:{" "}
           <input
             type="text"
             name="username"
@@ -120,7 +124,7 @@ const Account = () => {
           />
         </p>
         <p>
-          Fullname :{" "}
+          Fullname:{" "}
           <input
             type="text"
             name="fullname"
@@ -130,7 +134,7 @@ const Account = () => {
           />
         </p>
         <p>
-          Email :{" "}
+          Email:{" "}
           <input
             type="text"
             name="email"
@@ -139,24 +143,27 @@ const Account = () => {
             disabled={!clickEdit}
           />
         </p>
+
         <div className="accountButton-div">
-          <button onClick={handleEditSave}>
+          <button onClick={handleEditToggle}>
             {clickEdit ? "Save" : "Edit"}
           </button>
           {clickEdit && <button onClick={handleEditCancel}>Cancel</button>}
         </div>
       </div>
+
       <div className="password-div">
         <div className="accountButton-div">
-          <button onClick={handlePassSave}>
+          <button onClick={handlePassToggle}>
             {clickPass ? "Save" : "Change Password"}
           </button>
           {clickPass && <button onClick={handlePassCancel}>Cancel</button>}
         </div>
+
         {clickPass && (
           <div className="passInput-div">
             <p>
-              Current Password :{" "}
+              Current Password:{" "}
               <input
                 type="password"
                 name="currentPassword"
@@ -165,7 +172,7 @@ const Account = () => {
               />
             </p>
             <p>
-              New Password :{" "}
+              New Password:{" "}
               <input
                 type="password"
                 name="newPassword"
