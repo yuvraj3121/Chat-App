@@ -51,7 +51,7 @@ const HomePage = () => {
   const handleLogout = async () => {
     await axios
       .post(
-        `https://chat-app-v3-s16n.onrender.com/api/v1/users/logout`,
+        `https://chat-app-v4.onrender.com/api/v1/users/logout`,
         {},
         {
           withCredentials: true,

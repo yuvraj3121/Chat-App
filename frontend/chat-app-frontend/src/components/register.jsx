@@ -27,7 +27,7 @@ const Register = () => {
 
     try {
       const res = await axios.post(
-        "https://chat-app-v3-s16n.onrender.com/api/v1/users/register",
+        "https://chat-app-v4.onrender.com/api/v1/users/register",
         {
           fullname,
           username,

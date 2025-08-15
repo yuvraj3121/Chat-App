@@ -20,7 +20,7 @@ const Chats = () => {
     const fetchMessages = async () => {
       try {
         const res = await axios.get(
-          `https://chat-app-v3-s16n.onrender.com/api/v1/message/userChats/${user._id}`,
+          `https://chat-app-v4.onrender.com/api/v1/message/userChats/${user._id}`,
           {
             withCredentials: true,
           }
@@ -52,7 +52,7 @@ const Chats = () => {
     if (username) {
       await axios
         .post(
-          "https://chat-app-v3-s16n.onrender.com/api/v1/users/find-user",
+          "https://chat-app-v4.onrender.com/api/v1/users/find-user",
           { username: username },
           {
             withCredentials: true,
