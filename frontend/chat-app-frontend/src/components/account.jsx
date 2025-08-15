@@ -20,13 +20,9 @@ const Account = () => {
 
   const getCurrentUser = async () => {
     await axios
-      .post(
-        "https://chat-app-v4.onrender.com/api/v1/users/current-user",
-        {},
-        {
-          withCredentials: true,
-        }
-      )
+      .get("https://chat-app-v4.onrender.com/api/v1/users/current-user", {
+        withCredentials: true,
+      })
       .then((res) => {
         // console.log(res.data.data);
         setUserData(res.data.data);
